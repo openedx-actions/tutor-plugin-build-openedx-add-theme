@@ -6,7 +6,7 @@
 #
 #------------------------------------------------------------------------------
 name: Open edX Tutor k8s build openedx - add theme
-description: 'Use Tutor to add a custom theme to your Docker container'
+description: Github Action to add a custom theme to your openedx Docker container
 branding:
   icon: 'cloud'
   color: 'orange'
