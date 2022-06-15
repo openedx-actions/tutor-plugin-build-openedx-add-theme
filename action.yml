@@ -1,0 +1,76 @@
+#------------------------------------------------------------------------------
+# Add a Python requirement to a tutor openedx container configuration.
+#   - download the repository
+#   - create a private.txt file if it does not already exist in the Ubuntu environment
+#   - add the requirement to the private.txt
+#
+#------------------------------------------------------------------------------
+name: Open edX Tutor k8s build openedx - add theme
+description: 'Use Tutor to add a custom theme to your Docker container'
+branding:
+  icon: 'cloud'
+  color: 'orange'
+inputs:
+  repository:
+    description: 'Repository anme of the additional XBlock repository to install for this build'
+    required: true
+  repository-organization:
+    description: 'the Github organization containing the XBlock repository to install for this build'
+    required: true
+  repository-ref:
+    description: 'branch or release of the XBlock repository'
+    required: true
+  repository-token:
+    description: Github access token for the repository, if it is private
+    required: false
+outputs:
+  path:
+    description: 'The local file path to the custom theme folder. Example: ~/.local/share/tutor/env/build/openedx/themes/edx-theme-example'
+    value: ${{ steps.finalize.outputs.path }}
+runs:
+  using: "composite"
+  steps:
+    - name: actions/checkout
+      uses: actions/checkout@v3.0.2
+
+    - name: Setup environment
+      id: init
+      shell: bash
+      run: |-
+        echo "THEMES_PATH=$(tutor config printroot)/env/build/openedx/themes" >> $GITHUB_ENV
+
+    - name: print tutor themes path
+      id: print-plugin-path
+      shell: bash
+      run: echo $THEMES_PATH
+
+    - name: Checkout repo
+      id: checkout-repo
+      uses: actions/checkout@v3.0.2
+      with:
+        repository: ${{ inputs.repository-organization }}/${{ inputs.repository }}
+        token: ${{ inputs.repository-token }}
+        path: ./${{ inputs.repository }}
+        ref: ${{ inputs.repository-ref }}
+
+    - name: move repo into position
+      id: move-repo
+      shell: bash
+      run: mv $GITHUB_WORKSPACE/${{ inputs.repository }} $THEMES_PATH/
+
+    - name: Set theme
+      shell: bash
+      run:  |-
+        tutor k8s settheme ${{ inputs.repository }}
+
+    - name: tutor themes directory contents
+      id: themes-directory
+      shell: bash
+      run: |-
+        ls ${THEMES_PATH} -lha
+
+    - name: Finalize workflow
+      id: finalize
+      shell: bash
+      run: |
+        echo "::set-output path=${THEMES_PATH}/${{ inputs.repository }}"
