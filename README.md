@@ -42,7 +42,7 @@ jobs:
 
       # THIS ACTION:
       - name: Add a custom theme
-        uses: openedx-actions/tutor-plugin-build-openedx-add-theme@v0.0.1
+        uses: openedx-actions/tutor-plugin-build-openedx-add-theme@v0.0.2
         with:
           repository: edx-theme-example
           repository-organization: lpm0073

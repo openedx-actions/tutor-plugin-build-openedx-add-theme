@@ -58,11 +58,6 @@ runs:
       shell: bash
       run: mv $GITHUB_WORKSPACE/${{ inputs.repository }} $THEMES_PATH/
 
-    - name: Set theme
-      shell: bash
-      run:  |-
-        tutor k8s settheme ${{ inputs.repository }}
-
     - name: tutor themes directory contents
       id: themes-directory
       shell: bash
