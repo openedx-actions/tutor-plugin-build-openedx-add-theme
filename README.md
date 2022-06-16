@@ -11,6 +11,8 @@
 
 Github Action that uses Tutor to add a Python requirement. Downloads the repository and adds a row to private.txt.
 
+This action was originally created to work seamlessly as a supporting action for [openedx-actions/tutor-plugin-build-openedx](https://github.com/openedx-actions/tutor-plugin-build-openedx) but it should also work with your own custom workflows.
+
 
 ## Usage:
 
@@ -38,11 +40,11 @@ jobs:
 
       # install and configure tutor
       - name: Configure Github workflow environment
-        uses: openedx-actions/tutor-k8s-init@v0.0.13
+        uses: openedx-actions/tutor-k8s-init@v1.0.0
 
       # THIS ACTION:
       - name: Add a custom theme
-        uses: openedx-actions/tutor-plugin-build-openedx-add-theme@v0.0.2
+        uses: openedx-actions/tutor-plugin-build-openedx-add-theme@v1.0.0
         with:
           repository: edx-theme-example
           repository-organization: lpm0073
@@ -54,5 +56,5 @@ jobs:
 
       # Build your openedx container
       - name: Build the image and upload to AWS ECR
-        uses: openedx-actions/tutor-plugin-build-openedx@v0.1.8
+        uses: openedx-actions/tutor-plugin-build-openedx@v1.0.0
 ```
