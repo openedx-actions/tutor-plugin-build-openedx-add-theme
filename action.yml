@@ -31,7 +31,7 @@ runs:
   using: "composite"
   steps:
     - name: actions/checkout
-      uses: actions/checkout@v3.1.0
+      uses: actions/checkout@v3.2.0
 
     - name: Setup environment
       id: init
@@ -46,7 +46,7 @@ runs:
 
     - name: Checkout repo
       id: checkout-repo
-      uses: actions/checkout@v3.1.0
+      uses: actions/checkout@v3.2.0
       with:
         repository: ${{ inputs.repository-organization }}/${{ inputs.repository }}
         token: ${{ inputs.repository-token }}
