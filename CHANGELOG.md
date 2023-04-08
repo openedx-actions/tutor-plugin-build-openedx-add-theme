@@ -5,6 +5,19 @@ All notable changes to this project will be documented in this file.
 The format is based on [Keep a Changelog](http://keepachangelog.com/)
 and this project adheres to [Semantic Versioning](http://semver.org/).
 
+## Version 1.0.1 (2023-04-08)
+
+- strongly type all inputs
+- default token to an empty string
+
+## Version 1.0.0 (2022-06-16)
+
+- general production release
+
+## Version 0.0.2 (2022-06-15)
+
+- can't set theme until the openedx container is built
+
 ## Version 0.0.1 (2022-06-16)
 
 General production release

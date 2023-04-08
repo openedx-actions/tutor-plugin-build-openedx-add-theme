@@ -43,12 +43,14 @@ jobs:
         uses: openedx-actions/tutor-k8s-init@v1.0.8
 
       # THIS ACTION:
+      #   repository-token is an optional input. Default value is ''
       - name: Add a custom theme
-        uses: openedx-actions/tutor-plugin-build-openedx-add-theme@v1.0.0
+        uses: openedx-actions/tutor-plugin-build-openedx-add-theme@v1.0.1
         with:
           repository: edx-theme-example
           repository-organization: lpm0073
           repository-ref: master
+          repository-token: ${{ secrets.PAT }}
 
       #
       # ... more configuration stuff ...

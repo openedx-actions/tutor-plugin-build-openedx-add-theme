@@ -14,15 +14,20 @@ inputs:
   repository:
     description: 'Repository anme of the additional XBlock repository to install for this build'
     required: true
+    type: string
   repository-organization:
     description: 'the Github organization containing the XBlock repository to install for this build'
     required: true
+    type: string
   repository-ref:
     description: 'branch or release of the XBlock repository'
     required: true
+    type: string
   repository-token:
     description: Github access token for the repository, if it is private
     required: false
+    default: ''
+    type: string
 outputs:
   path:
     description: 'The local file path to the custom theme folder. Example: ~/.local/share/tutor/env/build/openedx/themes/edx-theme-example'
