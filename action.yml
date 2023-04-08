@@ -49,14 +49,24 @@ runs:
       shell: bash
       run: echo $THEMES_PATH
 
-    - name: Checkout repo
-      id: checkout-repo
+    - name: Checkout repo without a token
+      if: inputs.repository-token == ''
+      id: checkout-repo-with-token
       uses: actions/checkout@v3.5.0
       with:
         repository: ${{ inputs.repository-organization }}/${{ inputs.repository }}
-        token: ${{ inputs.repository-token }}
         path: ./${{ inputs.repository }}
         ref: ${{ inputs.repository-ref }}
+
+    - name: Checkout repo with token
+      if: inputs.repository-token != ''
+      id: checkout-repo-without-token
+      uses: actions/checkout@v3.5.0
+      with:
+        repository: ${{ inputs.repository-organization }}/${{ inputs.repository }}
+        path: ./${{ inputs.repository }}
+        ref: ${{ inputs.repository-ref }}
+        token: ${{ inputs.repository-token }}
 
     - name: move repo into position
       id: move-repo
