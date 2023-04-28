@@ -14,9 +14,7 @@ Github Action that downloads and adds a custom Open edX theme repository to your
 
 This action was originally created to work seamlessly as a supporting action for [openedx-actions/tutor-plugin-build-openedx](https://github.com/openedx-actions/tutor-plugin-build-openedx) but it should also work with your own custom workflows.
 
-
-## Usage:
-
+## Usage
 
 ```yaml
 name: Example workflow
